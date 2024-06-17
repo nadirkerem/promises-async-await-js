@@ -2,7 +2,6 @@
 import { central, db1, db2, db3, vault } from './databases.js';
 
 // Using Promise
-/*
 function getUserData(id) {
   const dbs = {
     db1: db1,
@@ -20,18 +19,17 @@ function getUserData(id) {
       ...basicInfo,
       ...personalInfo,
     }))
-    .catch(() => {
-      throw new Error('User not found');
+    .catch((error) => {
+      return Promise.reject(error);
     });
 }
 
 getUserData(3).then(console.log).catch(console.error);
 getUserData(5).then(console.log).catch(console.error);
 getUserData(0).then(console.log).catch(console.error);
-*/
 
 // Using async/await
-async function getUserData(id) {
+async function getAsyncUserData(id) {
   const dbs = {
     db1: db1,
     db2: db2,
@@ -53,10 +51,10 @@ async function getUserData(id) {
       ...personalInfo,
     };
   } catch (error) {
-    return Promise.reject(`Database error: ${error}`);
+    return Promise.reject(error);
   }
 }
 
-getUserData(4).then(console.log).catch(console.error);
-getUserData(6).then(console.log).catch(console.error);
-getUserData(11).then(console.log).catch(console.error);
+getAsyncUserData(4).then(console.log).catch(console.error);
+getAsyncUserData(6).then(console.log).catch(console.error);
+getAsyncUserData(11).then(console.log).catch(console.error);
