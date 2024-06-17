@@ -9,6 +9,10 @@ function getUserData(id) {
     db3: db3,
   };
 
+  if (typeof id !== 'number' || id < 1 || id > 10) {
+    return Promise.reject(new Error('Invalid ID provided.'));
+  }
+
   return central(id)
     .then((db) => {
       const database = dbs[db];
@@ -35,6 +39,10 @@ async function getAsyncUserData(id) {
     db2: db2,
     db3: db3,
   };
+
+  if (typeof id !== 'number' || id < 1 || id > 10) {
+    return Promise.reject(new Error('Invalid ID provided.'));
+  }
 
   try {
     const databaseID = await central(id);
